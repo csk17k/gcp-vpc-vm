@@ -12,7 +12,7 @@ variable "project" {
 
 variable "prefix" {
   description = "This prefix will be included in the name of some resources. You can use your own name or any other short string here."
-  default     = "terraform-9999"
+  default     = "gcp"
 }
 
 variable "region" {
