@@ -5,6 +5,17 @@ provider "google" {
   credentials = file("credentials.json")
 }
 
+# New resource for the storage bucket our application will use.
+resource "google_storage_bucket" "static-site" {
+  name     = "harsha2021"
+  location = "US"
+
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "404.html"
+  }
+}
+
 resource "google_compute_network" "webserver" {
   name                    = "${var.prefix}-vpc-${var.region}"
   auto_create_subnetworks = false
