@@ -1,0 +1,39 @@
+# Create a new cluster with the appropriate configuration for this application
+ - name: 'gcr.io/cloud-builders/gcloud'
+   id: Create Cluster
+   waitFor: ['-']
+   args: [
+     'container', 'clusters', 'create', 'gcpcluster',
+     '--machine-type', 'e2-micro',
+     '--num-nodes', '3',
+     '--cluster-version', '${_CLUSTER_GKE_VERSION}',
+     '--zone', 'asia-east1-c'
+   ] 
+   
+# This step deploys your image in kubernetes cluster specfied in below env
+ - name: 'gcr.io/cloud-builders/kubectl'
+   id: GKE Deploy
+   args:
+   - 'apply'
+   - '-f'
+   - 'deploy.yaml'
+   env:
+   - 'CLOUDSDK_COMPUTE_ZONE=asia-east1-c'
+   - 'CLOUDSDK_CONTAINER_CLUSTER=gcpcluster'
+# This steps service your image in kubernetes cluster specfied in below env
+ - name: 'gcr.io/cloud-builders/kubectl'
+   id: service expose
+   waitFor: ['-']
+   args: 
+     - expose
+     - deployment
+     - tomcat
+     - "--type"
+     - LoadBalancer
+     - "--port"
+     - "8080"
+     - "--target-port"
+     - "8080"
+   env:
+   - 'CLOUDSDK_COMPUTE_ZONE=asia-east1-c'
+   - 'CLOUDSDK_CONTAINER_CLUSTER=gcpcluster'   
