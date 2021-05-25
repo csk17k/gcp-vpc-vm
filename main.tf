@@ -7,7 +7,7 @@ provider "google" {
 
 # New resource for the storage bucket our application will use.
 resource "google_storage_bucket" "static-site" {
-  name     = "harsha2021"
+  name     = "csk2021"
   location = "US"
 
   website {
