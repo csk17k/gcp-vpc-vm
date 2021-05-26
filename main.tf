@@ -65,3 +65,8 @@ resource "google_compute_instance" "webserver" {
     name = "webserver"
   }
 }
+resource "null_resource" "git_clone" {
+  provisioner "local-exec" {
+    command = "git clone https://github.com/sricharankoyalkar/spring-mvc-login.git"
+  }
+}
