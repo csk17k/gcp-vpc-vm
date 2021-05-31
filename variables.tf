@@ -34,25 +34,6 @@ variable "machine_type" {
   description = "Specifies the GCP instance type."
   default     = "f1-micro"
 }
-
-variable "env" {
-  type = string
-}
-
-variable "image_tag" {
-}
-
-variable "k8s_master_allowed_ip" {
-}
-
-variable "network_name" {
-}
-
-variable "node_count" {
-  default = "1"
-}
-
-
 variable "height" {
   default     = "400"
   description = "Image height in pixels."
