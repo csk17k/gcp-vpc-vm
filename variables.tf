@@ -45,9 +45,6 @@ variable "image_tag" {
 variable "k8s_master_allowed_ip" {
 }
 
-variable "machine_type" {
-}
-
 variable "network_name" {
 }
 
